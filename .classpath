@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="gen"/>
+	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
+	<classpathentry kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
+	<classpathentry kind="lib" path="lib/facebook-java-api-1.7.4.jar"/>
+	<classpathentry kind="lib" path="lib/signpost-commonshttp4-1.2.1.1.jar"/>
+	<classpathentry kind="lib" path="lib/twitter4j-core-2.2.4.jar"/>
+	<classpathentry kind="lib" path="lib/gdata-calendar-2.0.jar"/>
+	<classpathentry kind="lib" path="lib/gdata-calendar-meta-2.0.jar"/>
+	<classpathentry kind="lib" path="lib/gdata-base-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/scribe-0.6.7-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="lib/facebook-android-sdk.jar"/>
+	<classpathentry kind="lib" path="lib/SocialLibBeta2_2.jar"/>
+	<classpathentry kind="lib" path="lib/gdata-client-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/gdata-core-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/signpost-core-1.2.1.1.jar"/>
+	<classpathentry kind="lib" path="lib/gdata-maps-2.0.jar"/>
+	<classpathentry kind="lib" path="lib/gdata-maps-meta-2.0.jar"/>
+	<classpathentry kind="lib" path="lib/guava-11.0.2.jar"/>
+	<classpathentry kind="lib" path="lib/mailapi.jar"/>
+	<classpathentry kind="lib" path="lib/activation.jar"/>
+	<classpathentry kind="lib" path="lib/additionnal.jar"/>
+	<classpathentry kind="lib" path="lib/smtp.jar"/>
+	<classpathentry kind="output" path="bin/classes"/>
+</classpath>
