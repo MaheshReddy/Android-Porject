@@ -55,6 +55,8 @@ public class SocialLibActivity extends Activity {
 		} else {
 			firstTimeHere();
 		}
+		setResult(RESULT_OK);
+		finish();
 	}
 
 	private void firstTimeHere() {

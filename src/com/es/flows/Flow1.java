@@ -1,31 +1,18 @@
 package com.es.flows;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import com.es.basic.BasicActivity;
-import com.es.basic.R;
-import com.es.basic.R.id;
-import com.es.basic.R.layout;
+import com.es.basic.BasicActivity1;
+import com.es.services.AmazonWSApp1Activity;
 import com.es.services.Email;
 import com.es.services.FacebookApp1Activity;
 import com.es.services.GoogleCal;
 import com.es.services.SocialLibActivity;
-import com.es.services.Twitterservicetest;
-import com.google.gdata.data.DateTime;
-
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Environment;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -38,9 +25,12 @@ public class Flow1 extends Activity {
 	EditText openname;
 	Button open;
 	AlertDialog.Builder alertbox;
-
+	private static String[] app_list;
+	private static ArrayList<String> args;
+	private static int app_count;
+	
 	private ArrayList<String> runApp(String app_name,ArrayList<String> args){
-		if (app_name.equals("goglCal")){
+		if (app_name.equals("gcal")){
 			GoogleCal cal = new GoogleCal();
 		     ArrayList<String> str = cal.onCreate();
 		    return str;
@@ -50,6 +40,7 @@ public class Flow1 extends Activity {
 					SocialLibActivity.class);
 			step2Intent.putExtra("args", args);
 			startActivityForResult(step2Intent, 1);
+			return args;
 		}
 		else if (app_name.equals("facebook")){
 
@@ -58,9 +49,22 @@ public class Flow1 extends Activity {
 			step3Intent.putExtra("args", args);
 			startActivityForResult(step3Intent, 1);
 		}
-		else if (app_name.equals("email")){
+		else if (app_name.equals("gmail")){
 			Intent step3Intent = new Intent(this.getBaseContext(),
 					Email.class);
+			step3Intent.putExtra("args", args);
+			startActivityForResult(step3Intent, 1);
+			return args;
+		}
+		else if(app_name.equals("amazon")){
+			Intent step3Intent = new Intent(this.getBaseContext(),
+					AmazonWSApp1Activity.class);
+			step3Intent.putExtra("args", args);
+			startActivityForResult(step3Intent, 1);
+		}
+		else if (app_name.equals("home")){
+			Intent step3Intent = new Intent(this.getBaseContext(),
+					BasicActivity.class);
 			step3Intent.putExtra("args", args);
 			startActivityForResult(step3Intent, 1);
 		}
@@ -71,12 +75,13 @@ public class Flow1 extends Activity {
 		super.onCreate(savedInstanceState);
 		Bundle extras = getIntent().getExtras();
 		String apps = extras.getString("apps");
-		String[] app_list = apps.split("&");
-		ArrayList<String> args = null;
-		for (int i=0;i<app_list.length;i++){
-			System.out.println(app_list[i]);
-			args = runApp(app_list[i],args);
-		}
+		//apps = apps + "-home";
+		app_list = apps.split("-");
+		args = null;
+		app_count=0;
+		args = runApp(app_list[app_count++],null);
+		onActivityResult(1,1,null);
+		
 		//setContentView(R.layout.note);
 		//SocialLibActivity twitter = new SocialLibActivity();
 		//twitter.twitterPost();
@@ -90,22 +95,25 @@ public class Flow1 extends Activity {
 		
 		}
 	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		// super.onActivityResult(requestCode, resultCode, data);
-	//	Toast.makeText(getApplicationContext(), "OnActRes", 800).show();
-		if (data != null) {
-			if (data.getStringExtra("FileName") != null) {
-				System.out.println("got result "
-						+ data.getStringExtra("FileName"));
-				if (requestCode == 0) {
-					if (resultCode == RESULT_OK) {
-						
-					}
-				}
-			}
-		}
-		System.out.println("Done");
-	} 
+	protected void onActivityResult(int requestCode, int resultCode,
+            Intent data) {
+		System.out.println("BasicActivity.onActivityResult()");
+        if (requestCode == 1) {
+                Toast.makeText(getApplicationContext(),"back from 1st activity", 200);
+                System.out.println("BasicActivity.onActivityResult() 1");
+                for (;app_count<app_list.length;app_count++){
+        			System.out.println(app_list[app_count]);
+        			args = runApp(app_list[app_count],args);
+        		}
+                //startActivityForResult(new Intent(this,SocialLibActivity.class), 2);
+                
+            }
+        if (requestCode == 2) {
+        	System.out.println("BasicActivity.onActivityResult()2");
+            Toast.makeText(getApplicationContext(),"back from 2nd activity", 200);
+            //startActivityForResult(new Intent(this,BasicActivity1.class), 2);
+        }
+}
 	
 }
 

@@ -28,6 +28,9 @@
         <activity android:name="com.es.services.GoogleCal"></activity>
         <activity android:name="com.es.services.FacebookApp1Activity"></activity>
         <activity android:name="com.es.services.Email"></activity>
+        <activity android:name="com.es.services.AmazonWSApp1Activity"></activity>
+        <activity android:name="NewAppActivity"></activity>
+        <activity android:name="AppStoreActivity"></activity>
     </application>
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />

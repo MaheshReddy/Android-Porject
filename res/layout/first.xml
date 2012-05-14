@@ -18,27 +18,11 @@
 	    android:layout_height="300dp" >
 	    
 	</LinearLayout>
-    <RelativeLayout
-        android:id="@+id/linearLayout1"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
-	<LinearLayout android:weightSum="1.0" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_centerInParent="true">
-        <Spinner
-            android:id="@+id/spinner1"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.33"
-            android:entries="@array/service_array"
-            android:prompt="@string/CreateApp" />
-
-   		<Spinner
-   		    android:id="@+id/spinner1"
-   		    android:layout_width="fill_parent"
-			android:layout_weight=".33"   		    
-   		    android:layout_height="wrap_content"
-   		    
-   		    android:entries="@array/service_array" />
-        
+	<LinearLayout
+	    android:id="@+id/linearLayout1"
+	    android:weightSum="1.0"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content">
         <Spinner
             android:id="@+id/spinner1"
             android:layout_width="fill_parent"
@@ -46,13 +30,34 @@
             android:layout_weight=".33"
             android:entries="@array/service_array" />
 
-        <LinearLayout
-            android:id="@+id/linearLayout2"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="0.00" >
-        </LinearLayout>
-</LinearLayout>
-    </RelativeLayout>
+   		<Spinner
+   		    android:id="@+id/spinner2"
+   		    android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+   		    android:layout_weight=".33"
+            android:entries="@array/service_array" />
+        
+        <Spinner
+            android:id="@+id/spinner3"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight=".33"
+            android:entries="@array/service_array" />
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.00" >
+        
+        <Button
+            android:id="@+id/button1"
+            style="@style/ButtonText"
+            android:layout_width="match_parent"
+            android:background="@drawable/bluebt"
+            android:text="Create" />
+        
+    </LinearLayout>
 </LinearLayout>

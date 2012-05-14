@@ -60,5 +60,7 @@ public class Email extends Activity {
 		} catch (MessagingException e) {
 			throw new RuntimeException(e);
 		}
+		setResult(RESULT_OK);
+		finish();
 	}
 }
