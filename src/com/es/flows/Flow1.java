@@ -5,10 +5,14 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
+import com.es.basic.BasicActivity;
 import com.es.basic.R;
 import com.es.basic.R.id;
 import com.es.basic.R.layout;
+import com.es.services.Email;
+import com.es.services.FacebookApp1Activity;
 import com.es.services.GoogleCal;
 import com.es.services.SocialLibActivity;
 import com.es.services.Twitterservicetest;
@@ -35,23 +39,73 @@ public class Flow1 extends Activity {
 	Button open;
 	AlertDialog.Builder alertbox;
 
-	
+	private ArrayList<String> runApp(String app_name,ArrayList<String> args){
+		if (app_name.equals("goglCal")){
+			GoogleCal cal = new GoogleCal();
+		     ArrayList<String> str = cal.onCreate();
+		    return str;
+		}
+		else if (app_name.equals("twitter")){
+			Intent step2Intent = new Intent(this.getBaseContext(),
+					SocialLibActivity.class);
+			step2Intent.putExtra("args", args);
+			startActivityForResult(step2Intent, 1);
+		}
+		else if (app_name.equals("facebook")){
+
+			Intent step3Intent = new Intent(this.getBaseContext(),
+					FacebookApp1Activity.class);
+			step3Intent.putExtra("args", args);
+			startActivityForResult(step3Intent, 1);
+		}
+		else if (app_name.equals("email")){
+			Intent step3Intent = new Intent(this.getBaseContext(),
+					Email.class);
+			step3Intent.putExtra("args", args);
+			startActivityForResult(step3Intent, 1);
+		}
+		return null;
+	}
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.note);
+		Bundle extras = getIntent().getExtras();
+		String apps = extras.getString("apps");
+		String[] app_list = apps.split("&");
+		ArrayList<String> args = null;
+		for (int i=0;i<app_list.length;i++){
+			System.out.println(app_list[i]);
+			args = runApp(app_list[i],args);
+		}
+		//setContentView(R.layout.note);
 		//SocialLibActivity twitter = new SocialLibActivity();
 		//twitter.twitterPost();
 		//Twitterservicetest.main(null);
+		/*
 		Intent step1Intent = new Intent(this.getBaseContext(),
-				GoogleCal.class);
-		startActivityForResult(step1Intent, 0);
-		Intent step2Intent = new Intent(this.getBaseContext(),
-				SocialLibActivity.class);
-		step2Intent.putExtra("msg", "Mahesh:");
-		startActivityForResult(step2Intent, 0);
+				BasicActivity.class);
+		startActivityForResult(step1Intent, 0);*/
+		
+		
 		
 		}
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// super.onActivityResult(requestCode, resultCode, data);
+	//	Toast.makeText(getApplicationContext(), "OnActRes", 800).show();
+		if (data != null) {
+			if (data.getStringExtra("FileName") != null) {
+				System.out.println("got result "
+						+ data.getStringExtra("FileName"));
+				if (requestCode == 0) {
+					if (resultCode == RESULT_OK) {
+						
+					}
+				}
+			}
+		}
+		System.out.println("Done");
+	} 
 	
 }
 

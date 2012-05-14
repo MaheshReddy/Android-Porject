@@ -26,6 +26,8 @@
             <intent-filter><action android:name="android.intent.action.VIEW" /><category android:name="android.intent.category.DEFAULT" /><category android:name="android.intent.category.BROWSABLE" /><data android:scheme="proapp" android:host="sociallib.com" /></intent-filter>
         </activity>
         <activity android:name="com.es.services.GoogleCal"></activity>
+        <activity android:name="com.es.services.FacebookApp1Activity"></activity>
+        <activity android:name="com.es.services.Email"></activity>
     </application>
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />

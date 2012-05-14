@@ -3,7 +3,9 @@ package com.es.services;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
@@ -40,21 +42,13 @@ public class SocialLibActivity extends Activity {
 
 	private static DateFormat logDateFormat = new SimpleDateFormat(
 			"yyyy/MM/dd HH:mm:ss", Locale.getDefault());
-	private String msg;
+	private static ArrayList<String> msg;
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		Bundle extras = getIntent().getExtras(); 
-		if(extras !=null)
-		{
-		 msg = extras.getString("msg");
-		}
-		else{
-			msg = new String("Dummy Mesage:");
-		}
-
+		
+		
 		Uri uri = this.getIntent().getData();
 		if (uri != null && uri.toString().startsWith(CALLBACK)) {
 			returningFromWebPage();
@@ -64,6 +58,13 @@ public class SocialLibActivity extends Activity {
 	}
 
 	private void firstTimeHere() {
+		Bundle extras = getIntent().getExtras();
+		if(extras != null)
+		 msg = extras.getStringArrayList("args");
+		else{
+			msg = new ArrayList<String>();
+			msg.add("Default:");
+		}
 		mConn = SocialNetworkHelper.createTwitterConnector(CONS_KEY, CONS_SEC,
 				CALLBACK);
 		/*
@@ -99,9 +100,11 @@ public class SocialLibActivity extends Activity {
 			for (TwitterUser us : ulist) {
 				Log.i(LOG_TAG, us.getUsername() + ", " + us.name);
 			}
-
-			mConn.tweet("@everyone: testing tweet from SocialLib! - "
-					+msg+ logDateFormat.format(new Date()));
+			Iterator<String> itr = msg.iterator();
+			while(itr.hasNext()){
+			mConn.tweet("@everyone:"
+					+itr.next()+ logDateFormat.format(new Date()));
+			}
 
 			Thread.sleep(20 * 1000);
 

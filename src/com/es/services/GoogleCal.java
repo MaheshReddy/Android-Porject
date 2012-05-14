@@ -3,6 +3,7 @@ package com.es.services;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -17,34 +18,36 @@ import com.google.gdata.util.ServiceException;
 import android.app.Activity;
 import android.os.Bundle;
 
-public class GoogleCal extends Activity {
+public class GoogleCal  {
 
 	private final static String url = "https://www.google.com/calendar/feeds/default/private/full";
 	private final static String usrName = "travelwatchmaster@gmail.com";
 	private final static String passwd = "interOP@123";
-	
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+
+	public ArrayList<String> onCreate() {
 		// TODO Auto-generated method stub
-		super.onCreate(savedInstanceState);
 		URL feedUrl;
+		ArrayList<String> rtr_str = null;
 		try {
 			feedUrl = new URL(url);
-		
 
-		CalendarQuery myQuery = new CalendarQuery(feedUrl);
-		//myQuery.setMinimumStartTime(DateTime.now());
-		CalendarService myService = new CalendarService("exampleCo-exampleApp-1");
-		myService.setUserCredentials(usrName, passwd);
+			CalendarQuery myQuery = new CalendarQuery(feedUrl);
+			// myQuery.setMinimumStartTime(DateTime.now());
+			CalendarService myService = new CalendarService(
+					"exampleCo-exampleApp-1");
+			myService.setUserCredentials(usrName, passwd);
 
-		// Send the request and receive the response:
-		CalendarEventFeed resultFeed = myService.query(myQuery, CalendarEventFeed.class);
-		List<CalendarEventEntry> ent = resultFeed.getEntries();
-		Iterator<CalendarEventEntry> itr = ent.iterator();
-		while(itr.hasNext()){
-			CalendarEventEntry entry = (CalendarEventEntry)itr.next();
-			System.out.println(entry.getTitle().getPlainText());
-		}
+			// Send the request and receive the response:
+			CalendarEventFeed resultFeed = myService.query(myQuery,
+					CalendarEventFeed.class);
+			List<CalendarEventEntry> ent = resultFeed.getEntries();
+			Iterator<CalendarEventEntry> itr = ent.iterator();
+			rtr_str = new ArrayList<String>();
+			while (itr.hasNext()) {
+				CalendarEventEntry entry = (CalendarEventEntry) itr.next();
+				System.out.println(entry.getTitle().getPlainText());
+				rtr_str.add(entry.getTitle().getPlainText());
+			}
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -55,5 +58,6 @@ public class GoogleCal extends Activity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-}
+		return  rtr_str;
+	}
 }

@@ -27,6 +27,8 @@ public class BasicActivity extends Activity {
 			public void onClick(View view) {
 				Intent myIntent = new Intent(view.getContext(),
 						Flow1.class);
+				//myIntent.putExtra("apps", "goglCal&twitter");
+				myIntent.putExtra("apps", "goglCal&email");
 				startActivityForResult(myIntent, 0);
 			}
 
