@@ -13,6 +13,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 public class Email extends Activity {
@@ -47,7 +48,7 @@ public class Email extends Activity {
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress("travelwatchmaster@gmail.com"));
 			message.setRecipients(Message.RecipientType.TO,
-				InternetAddress.parse("mahesh961@gmail.com"));
+				InternetAddress.parse("travelwatchmaster@gmail.com"));
 			Iterator<String> itr = msg.iterator();
 			while(itr.hasNext()){
 			String msg1 = itr.next();
@@ -60,7 +61,9 @@ public class Email extends Activity {
 		} catch (MessagingException e) {
 			throw new RuntimeException(e);
 		}
+		//Intent intent = new Intent();
 		setResult(RESULT_OK);
+		System.out.println("Email.onCreate() " + "return");
 		finish();
 	}
 }

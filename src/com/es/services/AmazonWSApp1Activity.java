@@ -17,7 +17,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 
-public class AmazonWSApp1Activity extends Activity {
+public class AmazonWSApp1Activity {
 	private static String TAG = "AmazonWSApp1Activity";
 
 	/*
@@ -50,10 +50,7 @@ public class AmazonWSApp1Activity extends Activity {
 	// private static final String ITEM_ID = "0545162076";
 
     /** Called when the activity is first created. */
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+    public ArrayList<String> onCreate() {
 
 		RequestHelper helper = null;
 		try {
@@ -62,7 +59,8 @@ public class AmazonWSApp1Activity extends Activity {
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
-
+		ArrayList<String> rtr=new ArrayList<String>();
+		
 		String str = "HarryPotter";
 		Log.d(TAG, "Fetching for " + str);
 		Map<String, String> params = new HashMap<String, String>();
@@ -86,12 +84,15 @@ public class AmazonWSApp1Activity extends Activity {
 			Log.e(TAG, "#Items = " + prodIds.size() + ", #Titles = "
 					+ prodTitles.size());
 		} else {
-			for (int i = 0; i < prodIds.size(); ++i)
+			for (int i = 0; i < 4; ++i){
 				Log.d(TAG, "Item Id: " + prodIds.get(i) + ", Title: "
 						+ prodTitles.get(i));
+				rtr.add("Item Id: " + prodIds.get(i) + ", Title: "
+						+ prodTitles.get(i));
+			}
 		}
+		return rtr;
 
-		finish();
     }
 
 	private static Document fetchResponse(String requestUrl) {

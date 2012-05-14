@@ -28,7 +28,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.33"
-            android:entries="@array/service_array"
+            android:entries="@array/service_array1"
             android:prompt="@string/CreateApp" />
 
    		<Spinner
@@ -37,14 +37,14 @@
 			android:layout_weight=".33"   		    
    		    android:layout_height="wrap_content"
    		    
-   		    android:entries="@array/service_array" />
+   		    android:entries="@array/service_array2" />
         
         <Spinner
             android:id="@+id/spinner1"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight=".33"
-            android:entries="@array/service_array" />
+            android:entries="@array/service_array3" />
 
         <LinearLayout
             android:id="@+id/linearLayout2"
