@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+       android:background="@drawable/andesk"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/NoteTitle" />
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:inputType="textMultiLine" />
+
+ <LinearLayout
+     android:id="@+id/linearLayout1"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:weightSum="1.0" >
+
+     <EditText
+         android:id="@+id/editText1"
+         android:layout_width="fill_parent"
+         android:layout_height="wrap_content"
+         android:layout_weight="0.7" />
+
+     <Button
+         android:id="@+id/buttonsave"
+         style="@style/ButtonText"
+         android:layout_width="fill_parent"
+         android:layout_height="wrap_content"
+         android:layout_gravity="center"
+         android:layout_weight=".3"
+         android:background="@drawable/bluebt"
+         android:text="@string/noteSave" />
+ </LinearLayout>
+
+
+    <LinearLayout 
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+<EditText
+    android:id="@+id/editText3"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight=".7" />
+
+        <Button
+            android:id="@+id/buttonopen"
+            style="@style/ButtonText"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bluebt"
+			android:layout_weight=".3"
+            android:text="@string/labelOpen" />
+
+        
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/buttonclear"
+                    android:background="@drawable/bluebt"
+                    style="@style/ButtonText"
+        
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Clear" />
+
+</LinearLayout>

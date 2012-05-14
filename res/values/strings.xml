@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, BasicActivity!</string>
+    <string name="app_name">Basic</string>
+    <string name="TitleMain">Notesenspage</string>
+    <string name="NoteButtonLabel">NewNote</string>
+    <string name="sensorLabel">Sensor</string>
+    <string name="webPageLabel">Browse</string>
+    <string name="sensorTitle">Sensor-GPS status</string>
+    <string name="Location">CurrentLocation is</string>
+    <string name="NoteTitle">Create New Note</string>
+    <string name="noteSave">Save</string>
+    
+    <string name="Service_propmpt">Choose a Service</string>
+    <string-array name="service_array">
+        <item>Facebook</item>
+        <item>Twitter</item>
+        <item>AWS</item>
+        <item>Google Maps</item>
+        <item>Amazon sales Rank</item>
+        <item>Google visualization</item>
+    </string-array>
+<style name="ButtonText">
+    <item name="android:layout_width">fill_parent</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:textColor">#ffffff</item>
+    <item name="android:gravity">center</item>
+    <item name="android:layout_margin">3dp</item>
+    <item name="android:textSize">20dp</item>
+    <item name="android:textStyle">bold</item>
+    <item name="android:shadowColor">#000000</item>
+    <item name="android:shadowDx">1</item>
+    <item name="android:shadowDy">1</item>
+    <item name="android:shadowRadius">2</item>
+</style>
+    <string name="labelOpen">Open</string>
+    <string name="CreateApp">Create a New App</string>
+	
+   
+     <string name="ChoiceNew">Create New</string>
+    <string name="ChoiseExisting">"AppStore "</string>
+    <string name="SearchString">Search App</string>
+    <string name="App1">App1</string>
+    <string name="Serv1Param">Param1</string>
+    <string-array name="Serv1Param">
+        <item >Longitude</item>
+        <item >Latitude</item>
+    </string-array>
+    <string-array name="Serv2Param">
+        <item >Status</item>
+        <item >update</item>
+    </string-array>
+        <string name="header">Credentials For service1</string>
+        <string name="amazserv">Credentials for Amazon</string>
+        <string name="labbutton">Done</string>
+</resources>
