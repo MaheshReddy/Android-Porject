@@ -1,6 +1,7 @@
 package com.es.basic;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -14,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 public class AppStoreActivity extends Activity {
 	private static final String TAG = "AppStoreActivity";
@@ -65,7 +67,12 @@ public class AppStoreActivity extends Activity {
 			br.close();
 			fis.close();
 
-		} catch (IOException e) {
+		} catch (FileNotFoundException ex){
+			Toast.makeText(getApplicationContext(), "App Store Empty",Toast.LENGTH_SHORT);
+			setResult(RESULT_OK);
+			finish();
+		}
+		catch (IOException e) {
 			throw new RuntimeException(e);
 		}
 

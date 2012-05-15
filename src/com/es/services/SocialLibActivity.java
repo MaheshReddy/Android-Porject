@@ -24,6 +24,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.es.basic.BasicActivity;
 import com.expertiseandroid.lib.sociallib.connectors.SocialNetworkHelper;
 import com.expertiseandroid.lib.sociallib.connectors.TwitterConnector;
 import com.expertiseandroid.lib.sociallib.exceptions.NotAuthentifiedException;
@@ -55,8 +56,6 @@ public class SocialLibActivity extends Activity {
 		} else {
 			firstTimeHere();
 		}
-		setResult(RESULT_OK);
-		finish();
 	}
 
 	private void firstTimeHere() {
@@ -137,9 +136,11 @@ public class SocialLibActivity extends Activity {
 			Log.e(LOG_TAG, "ERROR! ", e);
 		}
 
-		Intent intent = new Intent();
-		setResult(RESULT_OK, intent);
-		finish();
+		//Intent intent = new Intent();
+		System.out.println("Flow1.returningFromWebPage()"+"Returning Twitter");
+		Intent step3Intent = new Intent(this,
+				BasicActivity.class);
+		startActivityForResult(step3Intent,0);
 	}
 
 }

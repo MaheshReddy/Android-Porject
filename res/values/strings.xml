@@ -13,14 +13,21 @@
     <string name="noteSave">Save</string>
     
     <string name="Service_propmpt">Choose a Service</string>
-    <string-array name="service_array">
-        <item>facebook</item>
-        <item>twitter</item>
+    <string-array name="service_array1">
+        
         <item>aws</item>
         <item>gcal</item>
-        <item>gmail</item>
-        <item>Google visualization</item>
+        
     </string-array>
+    <string-array name="service_array2">
+        <item>facebook</item>
+        <item>gmail</item>
+    </string-array>
+    <string-array name="service_array3">
+        <item>facebook</item>
+        <item>twitter</item>
+        <item>gmail</item>
+            </string-array>
 <style name="ButtonText">
     <item name="android:layout_width">fill_parent</item>
     <item name="android:layout_height">wrap_content</item>
