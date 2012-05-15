@@ -6,7 +6,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Locale;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -28,9 +27,6 @@ import com.es.basic.BasicActivity;
 import com.expertiseandroid.lib.sociallib.connectors.SocialNetworkHelper;
 import com.expertiseandroid.lib.sociallib.connectors.TwitterConnector;
 import com.expertiseandroid.lib.sociallib.exceptions.NotAuthentifiedException;
-import com.expertiseandroid.lib.sociallib.model.twitter.TwitterStatus;
-import com.expertiseandroid.lib.sociallib.model.twitter.TwitterUser;
-import com.google.gdata.data.DateTime;
 
 public class SocialLibActivity extends Activity {
 	private static final String CONS_KEY = "9AM37qFIN46S6s4RBnSQw";
@@ -43,13 +39,21 @@ public class SocialLibActivity extends Activity {
 
 	private static DateFormat logDateFormat = new SimpleDateFormat(
 			"yyyy/MM/dd HH:mm:ss", Locale.getDefault());
+
 	private static ArrayList<String> msg;
+
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
-		
+		// setContentView(R.layout.head);
+
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+
 		Uri uri = this.getIntent().getData();
 		if (uri != null && uri.toString().startsWith(CALLBACK)) {
 			returningFromWebPage();
@@ -60,12 +64,19 @@ public class SocialLibActivity extends Activity {
 
 	private void firstTimeHere() {
 		Bundle extras = getIntent().getExtras();
-		if(extras != null)
-		 msg = extras.getStringArrayList("args");
+		if (extras != null) {
+			Log.d(LOG_TAG, "making msg array from extras");
+			msg = extras.getStringArrayList("args");
+			if (msg == null) {
+				Log.e(LOG_TAG, "Null msg array passed from previous step?");
+			}
+		}
 		else{
+			Log.d(LOG_TAG, "creating default msg array");
 			msg = new ArrayList<String>();
 			msg.add("Default:");
 		}
+
 		mConn = SocialNetworkHelper.createTwitterConnector(CONS_KEY, CONS_SEC,
 				CALLBACK);
 		/*
@@ -88,25 +99,32 @@ public class SocialLibActivity extends Activity {
 	}
 
 	private void returningFromWebPage() {
-		List<TwitterUser> ulist;
-		List<TwitterStatus> list;
+		// List<TwitterUser> ulist;
+		// List<TwitterStatus> list;
 
 		// We are returning to the activity, the user has enterd his credentials
 		// already, so we can authorize the application
 		try {
 			mConn.authorize(this);
 
+			/*
 			ulist = mConn.getFollowers();
 			Log.i(LOG_TAG, "===== Followers =====");
 			for (TwitterUser us : ulist) {
 				Log.i(LOG_TAG, us.getUsername() + ", " + us.name);
 			}
-			Iterator<String> itr = msg.iterator();
-			while(itr.hasNext()){
-			mConn.tweet("@everyone:"
-					+itr.next()+ logDateFormat.format(new Date()));
+			 */
+			if (msg == null) {
+				Log.e(LOG_TAG, "NULL msg array?");
+			} else {
+				Iterator<String> itr = msg.iterator();
+				while (itr.hasNext()) {
+					mConn.tweet(itr.next() + " @ "
+							+ logDateFormat.format(new Date()));
+				}
 			}
 
+			/*
 			Thread.sleep(20 * 1000);
 
 			list = mConn.getWallPosts(); // We create a list containing the
@@ -115,6 +133,7 @@ public class SocialLibActivity extends Activity {
 			for (TwitterStatus st : list) {
 				Log.i(LOG_TAG, st.getContents());
 			}
+			 */
 
 		} catch (NotAuthentifiedException e) {
 			Log.e(LOG_TAG, "ERROR! ", e);
@@ -132,9 +151,9 @@ public class SocialLibActivity extends Activity {
 			Log.e(LOG_TAG, "ERROR! ", e);
 		} catch (IOException e) {
 			Log.e(LOG_TAG, "ERROR! ", e);
-		} catch (InterruptedException e) {
+		} /*catch (InterruptedException e) {
 			Log.e(LOG_TAG, "ERROR! ", e);
-		}
+		}*/
 
 		//Intent intent = new Intent();
 		System.out.println("Flow1.returningFromWebPage()"+"Returning Twitter");

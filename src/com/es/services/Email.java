@@ -13,11 +13,11 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 
 public class Email extends Activity {
 	private static ArrayList<String> msg;
+	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Bundle extras = getIntent().getExtras();
@@ -38,6 +38,7 @@ public class Email extends Activity {
  
 		Session session = Session.getInstance(props,
 		  new javax.mail.Authenticator() {
+			@Override
 			protected PasswordAuthentication getPasswordAuthentication() {
 				return new PasswordAuthentication(username, password);
 			}

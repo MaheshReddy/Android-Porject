@@ -3,6 +3,11 @@ package com.es.services;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,7 +15,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.es.basic.R;
 import com.facebook.android.AsyncFacebookRunner;
 import com.facebook.android.AsyncFacebookRunner.RequestListener;
 import com.facebook.android.DialogError;
@@ -26,11 +30,28 @@ public class FacebookApp1Activity extends Activity {
 	private AsyncFacebookRunner mAsyncRunner = null;
 	private SharedPreferences mPrefs;
 
+	private static DateFormat logDateFormat = new SimpleDateFormat(
+			"yyyy/MM/dd HH:mm:ss", Locale.getDefault());
+
+	private/* static */ArrayList<String> msg;
+
 	/** Called when the activity is first created. */
     @Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main);
+		// setContentView(R.layout.head);
+
+		Bundle extras = getIntent().getExtras();
+		if (extras != null) {
+			msg = extras.getStringArrayList("args");
+			if (msg == null) {
+				Log.e(TAG, "NULL msg array passed from previous step?");
+			}
+		}
+		else {
+			msg = new ArrayList<String>();
+			msg.add("Default:");
+		}
 
 		/*
 		 * Get existing access_token if any
@@ -97,9 +118,15 @@ public class FacebookApp1Activity extends Activity {
 			return;
 		}
 
+		if (msg == null) {
+			Log.e(TAG, "NULL msg array?");
+			return;
+		}
+
 		if (mAsyncRunner == null)
 			mAsyncRunner = new AsyncFacebookRunner(facebook);
 
+		Log.d(TAG, "msg array size = " + msg.size());
 		Bundle params = new Bundle();
 		params.putString(Facebook.TOKEN, token);
 		params.putString("message", createRandomMessage());
@@ -107,8 +134,13 @@ public class FacebookApp1Activity extends Activity {
 				FacebookOper.FB_POST), null);
 	}
 
-	private static String createRandomMessage() {
-		return "some high entropy text: " + System.currentTimeMillis();
+	private String createRandomMessage() {
+		String msgf = "";
+		if (!msg.isEmpty()) {
+			msgf += msg.remove(0) + " @ " + logDateFormat.format(new Date());
+		}
+		return msgf;
+		// return "some high entropy text: " + System.currentTimeMillis();
 	}
 
 	@Override
@@ -140,16 +172,31 @@ public class FacebookApp1Activity extends Activity {
 		public void onComplete(String response, Object state) {
 			Log.d(mTag, "Completed! got response: " + response);
 			if (FacebookOper.FB_POST.equals(mOper)) {
-				/*
-				 * this will revoke 'publish_stream' permission Note: If you
-				 * don't specify a permission then this will de-authorize the
-				 * application completely.
-				 */
-				Bundle params = new Bundle();
-				params.putString("permission", "publish_stream");
-				mAsyncRunner.request("/me/permissions", params, "DELETE",
-						new SampleReqListener(FacebookOper.FB_REVOKE_PERMS),
-						null);
+				if (!msg.isEmpty()) {
+					String token = facebook.getAccessToken();
+					Bundle params = new Bundle();
+					params.putString(Facebook.TOKEN, token);
+					params.putString("message", createRandomMessage());
+					mAsyncRunner.request("/me/feed", params, "POST",
+							new SampleReqListener(FacebookOper.FB_POST), null);
+				} else {
+					/*
+					 * this will revoke 'publish_stream' permission Note: If you
+					 * don't specify a permission then this will de-authorize
+					 * the application completely.
+					 */
+					/*
+					Bundle params = new Bundle();
+					params.putString("permission", "publish_stream");
+					mAsyncRunner
+							.request("/me/permissions", params, "DELETE",
+									new SampleReqListener(
+											FacebookOper.FB_REVOKE_PERMS),
+							null);
+					 */
+					mAsyncRunner.logout(getApplicationContext(),
+							new SampleReqListener(FacebookOper.FB_LOGOUT));
+				}
 
 			} else if (FacebookOper.FB_REVOKE_PERMS.equals(mOper)) {
 				mAsyncRunner.logout(getApplicationContext(),
@@ -160,6 +207,7 @@ public class FacebookApp1Activity extends Activity {
 				editor.clear();
 				editor.commit();
 
+				setResult(RESULT_OK);
 				finish();
 
 			}

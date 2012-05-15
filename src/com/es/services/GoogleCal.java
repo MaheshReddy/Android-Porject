@@ -9,14 +9,9 @@ import java.util.List;
 
 import com.google.gdata.client.calendar.CalendarQuery;
 import com.google.gdata.client.calendar.CalendarService;
-import com.google.gdata.data.DateTime;
-import com.google.gdata.data.Feed;
 import com.google.gdata.data.calendar.CalendarEventEntry;
 import com.google.gdata.data.calendar.CalendarEventFeed;
 import com.google.gdata.util.ServiceException;
-
-import android.app.Activity;
-import android.os.Bundle;
 
 public class GoogleCal  {
 
@@ -44,7 +39,7 @@ public class GoogleCal  {
 			Iterator<CalendarEventEntry> itr = ent.iterator();
 			rtr_str = new ArrayList<String>();
 			while (itr.hasNext()) {
-				CalendarEventEntry entry = (CalendarEventEntry) itr.next();
+				CalendarEventEntry entry = itr.next();
 				System.out.println(entry.getTitle().getPlainText());
 				rtr_str.add(entry.getTitle().getPlainText());
 			}

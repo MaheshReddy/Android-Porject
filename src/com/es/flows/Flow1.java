@@ -2,13 +2,6 @@ package com.es.flows;
 
 import java.util.ArrayList;
 
-import com.es.basic.BasicActivity;
-import com.es.basic.BasicActivity1;
-import com.es.services.AmazonWSApp1Activity;
-import com.es.services.Email;
-import com.es.services.FacebookApp1Activity;
-import com.es.services.GoogleCal;
-import com.es.services.SocialLibActivity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -16,6 +9,13 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.es.basic.BasicActivity;
+import com.es.services.AmazonWSApp1Activity;
+import com.es.services.Email;
+import com.es.services.FacebookApp1Activity;
+import com.es.services.GoogleCal;
+import com.es.services.SocialLibActivity;
 
 public class Flow1 extends Activity {
 	/** Called when the activity is first created. */
@@ -50,6 +50,9 @@ public class Flow1 extends Activity {
 					FacebookApp1Activity.class);
 			step3Intent.putExtra("args", args);
 			startActivityForResult(step3Intent, retVal);
+			System.out.println("Flow1.runApp() return " + app_name + ", "
+					+ args.size());
+			return args;
 		}
 		else if (app_name.equals("gmail")){
 			Intent step3Intent = new Intent(this,
@@ -72,9 +75,12 @@ public class Flow1 extends Activity {
 		}
 		return null;
 	}
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		// setContentView(R.layout.head);
+
 		Bundle extras = getIntent().getExtras();
 		String apps = extras.getString("apps");
 		apps = apps + "-home";
@@ -100,6 +106,7 @@ public class Flow1 extends Activity {
 		
 		}
 
+	@Override
 	protected void onActivityResult(int requestCode, int resultCode,
             Intent data) {
 		System.out.println("Flow1.onActivityResult():"+app_list[app_count++]+requestCode);
@@ -114,7 +121,7 @@ public class Flow1 extends Activity {
         		
             }
         if (requestCode == 2) {
-            Toast.makeText(getApplicationContext(),"back from 1st activity", 200);
+            Toast.makeText(getApplicationContext(),"back from 2nd activity", 200);
             //System.out.println("BasicActivity.onActivityResult() 1");
             	//System.out.println(app_list[app_count]);
             	//if (app_count < app_list.length)

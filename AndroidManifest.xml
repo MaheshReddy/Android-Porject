@@ -5,6 +5,9 @@
     android:versionName="1.0" >
 
     <uses-sdk android:minSdkVersion="8" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:icon="@drawable/ic_launcher"
@@ -20,10 +23,13 @@
         </activity>
         <activity android:name="com.es.flows.Flow1" >
         </activity>
-        <activity android:name="com.es.flows.SensorActivity" >
-        </activity>
         <activity android:name="com.es.services.SocialLibActivity">
-            <intent-filter><action android:name="android.intent.action.VIEW" /><category android:name="android.intent.category.DEFAULT" /><category android:name="android.intent.category.BROWSABLE" /><data android:scheme="proapp" android:host="sociallib.com" /></intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="proapp" android:host="sociallib.com" />
+            </intent-filter>
         </activity>
         <activity android:name="com.es.services.GoogleCal"></activity>
         <activity android:name="com.es.services.FacebookApp1Activity"></activity>
@@ -32,7 +38,5 @@
         <activity android:name="NewAppActivity"></activity>
         <activity android:name="AppStoreActivity"></activity>
     </application>
-	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-	<uses-permission android:name="android.permission.INTERNET" />  
+  
 </manifest>

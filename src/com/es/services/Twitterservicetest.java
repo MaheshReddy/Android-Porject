@@ -1,17 +1,16 @@
  
 package com.es.services;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.Date;
+
 import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Date;
 
 /**
  * Example application that uses OAuth method to acquire access to your account.<br>
@@ -26,6 +25,7 @@ public  class Twitterservicetest {
      * @param args message
      */
 
+	@SuppressWarnings("unused")
 	public static void main(String a[]) {
 		 try {
 	            Twitter twitter = new TwitterFactory().getInstance();
@@ -75,7 +75,7 @@ public  class Twitterservicetest {
 	                    System.exit(-1);
 	                }
 	            }
-	            Status status = twitter.updateStatus((String)"Test from Activiti 5.9 failed. Retrying in  "+ new Date().getSeconds() + " seconds");
+	            Status status = twitter.updateStatus("Test from Activiti 5.9 failed. Retrying in  "+ new Date().getSeconds() + " seconds");
 	            System.out.println("Successfully updated the status to [" + status.getText() + "].");
 	            System.exit(0);
 	        } catch (TwitterException te) {

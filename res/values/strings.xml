@@ -2,8 +2,8 @@
 <resources>
 
     <string name="hello">Hello World, BasicActivity!</string>
-    <string name="app_name">Design</string>
-    <string name="TitleMain">Notesenspage</string>
+    <string name="app_name">AdHoc</string>
+    <string name="TitleMain">Ad-Hoc On Demand</string>
     <string name="NoteButtonLabel">NewNote</string>
     <string name="sensorLabel">Sensor</string>
     <string name="webPageLabel">Browse</string>

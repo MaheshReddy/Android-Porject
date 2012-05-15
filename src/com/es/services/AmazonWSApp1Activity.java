@@ -11,10 +11,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
-import com.es.basic.R;
-
-import android.app.Activity;
-import android.os.Bundle;
 import android.util.Log;
 
 public class AmazonWSApp1Activity {
